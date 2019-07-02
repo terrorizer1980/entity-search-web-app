@@ -10,7 +10,7 @@ services:
     expose:
       - 8080
     volumes:
-      - /opt/senzing:/opt/senzing
+      - c:/opt/senzing:/opt/senzing
     restart: 'on-failure'
 
   senzing-webapp:
@@ -18,12 +18,12 @@ services:
     container_name: senzing-webapp
     command: "start:docker"
     depends_on:
-      - senzing-api-server
+      - senzing-webapp-e2e-api-server
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      SENZING_API_SERVER_URL: "http://senzing-api-server:8080"
+      SENZING_API_SERVER_URL: "http://senzing-webapp-e2e-api-server:8080"
       SENZING_WEB_SERVER_PORT: 8080
       SENZING_WEB_SERVER_API_PATH: '/api'
     networks:
@@ -35,17 +35,32 @@ services:
       - 8081:8080
     restart: 'always'
 
+  senzing-webapp-e2e-api-server:
+    image: senzing/senzing-webapp-e2e-api-server
+    container_name: senzing-webapp-e2e-api-server
+    command: "-iniFile /opt/senzing/e2e/temp/g2.ini -httpPort 8080 -bindAddr all"
+    build:
+        context: ./e2e
+        dockerfile: Dockerfile
+    networks:
+      - sz-api-network
+    expose:
+      - 8080
+    volumes:
+      - c:/opt/senzing:/opt/senzing
+    restart: 'no'
+
   senzing-webapp-e2e:
       image: senzing/entity-search-web-app
       container_name: senzing-webapp-e2e-server
-      command: "e2e:docker"
+      command: "e2e:full"
       depends_on:
-        - senzing-api-server
+        - senzing-webapp-e2e-api-server
       build:
         context: .
         dockerfile: Dockerfile
       environment:
-        SENZING_API_SERVER_URL: "http://senzing-api-server:8080"
+        SENZING_API_SERVER_URL: "http://senzing-webapp-e2e-api-server:8080"
         SENZING_WEB_SERVER_PORT: 8080
         SENZING_WEB_SERVER_API_PATH: '/api'
       networks:

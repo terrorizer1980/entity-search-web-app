@@ -17,6 +17,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e --configuration=e2e --protractor-config=e2e/protractor.conf.js",
     "e2e:docker": "node inject-env && ng e2e --port 8080 --configuration=e2e --protractor-config=e2e/protractor.docker.conf.js",
+    "e2e:full": "node inject-env && ng e2e --port 8080 --configuration=docker --protractor-config=e2e/protractor.docker.conf.js",
     "e2e:headless": "ng e2e --configuration=e2e --protractor-config=e2e/protractor.ci.conf.js"
   },
   "private": true,
