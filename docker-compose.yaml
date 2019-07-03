@@ -7,10 +7,10 @@ services:
     command: "-iniFile /opt/senzing/g2/python/G2Module.ini -httpPort 8080 -bindAddr all"
     networks:
       - sz-api-network
-    expose:
-      - 8080
+    ports:
+      - 8080:8080
     volumes:
-      - c:/opt/senzing:/opt/senzing
+      - /opt/senzing:/opt/senzing
     restart: 'on-failure'
 
   senzing-webapp:
@@ -44,14 +44,14 @@ services:
         dockerfile: Dockerfile
     networks:
       - sz-api-network
-    expose:
-      - 8080
+    ports:
+      - 8080:8080
     volumes:
-      - c:/opt/senzing:/opt/senzing
+      - /opt/senzing:/opt/senzing
     restart: 'no'
 
   senzing-webapp-e2e:
-      image: senzing/entity-search-web-app
+      image: senzing/entity-search-web-app-e2e
       container_name: senzing-webapp-e2e-server
       command: "e2e:full"
       depends_on:

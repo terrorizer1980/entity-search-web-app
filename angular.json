@@ -186,6 +186,7 @@
             "e2e": {
               "devServerTarget": "entity-search-web-app:serve:e2e"
             },
+            "dev": {},
             "docker": {
               "devServerTarget": "entity-search-web-app:serve:docker"
             }
