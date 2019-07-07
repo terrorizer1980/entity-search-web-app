@@ -32,8 +32,8 @@ fi
 if [[ ! -e $repoLocation ]]; then
   java -jar /app/senzing-api-server.jar --repomgr -createRepo ${repoLocation}
   java -jar /app/senzing-api-server.jar --repomgr -repo ${repoLocation} -configSources owners companies
-  java -jar /app/senzing-api-server.jar --repomgr -repo ${repoLocation} -dataSource companies -loadFile /opt/senzing/e2e/data/suite1/relTestCompanies.csv
-  java -jar /app/senzing-api-server.jar --repomgr -repo ${repoLocation} -dataSource owners -loadFile /opt/senzing/e2e/data/suite1/relTestOwners.csv
+  java -jar /app/senzing-api-server.jar --repomgr -repo ${repoLocation} -dataSource companies -loadFile /opt/senzing/e2e/suites/001/data/relTestCompanies.csv
+  java -jar /app/senzing-api-server.jar --repomgr -repo ${repoLocation} -dataSource owners -loadFile /opt/senzing/e2e/suites/001/data/relTestOwners.csv
 elif [[ -e $repoLocation ]]; then
   echo ""
   echo "DATE REPO NOT EMPTY!"
