@@ -58,7 +58,13 @@ export class SearchBox {
     this.getSearchAddress().sendKeys(value);
   }
 
-
+  getSearchPhone() {
+    return this.getSearchComponent().$('#entity-phone');
+  }
+  setSearchPhone(value) {
+    this.getSearchPhone().click();
+    this.getSearchPhone().sendKeys(value);
+  }
 
   getSearchInputIdentifier() {
     return this.getSearchComponent().$('select.identifier-dropdown');
@@ -107,15 +113,15 @@ export class SearchBox {
   }
 
   getNameOnly() {
-    return element.all(by.css('.sz-search-result-card-wrapper.name-only')).count();
+    return element.all(by.css('.sz-search-result-card-wrapper.name-only'));
   }
 
   getPossibleMatches() {
-    return element.all(by.css('.sz-search-result-card-wrapper.possible-match')).count();
+    return element.all(by.css('.sz-search-result-card-wrapper.discovered-relationships'));
   }
 
   getRelationships() {
-    return element.all(by.css('.sz-search-result-card-wrapper.discovered-relationships')).count();
+    return element.all(by.css('.sz-search-result-card-wrapper.possible-match'));
   }
 
   waitForSearchResults() {
@@ -123,4 +129,8 @@ export class SearchBox {
     browser.wait(EC.visibilityOf(res.first()), 10000, 'search.po.waitForSearchResults timed out');
   }
 
+  waitForNoResults() {
+    const res = element.all(by.css('app-no-results'));
+    browser.wait(EC.visibilityOf(res.first()), 10000, 'search.po.waitForNoResults timed out');
+  }
 }
