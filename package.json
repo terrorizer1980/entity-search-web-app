@@ -57,7 +57,7 @@
     "jspdf": "^2.1.0",
     "ngx-webstorage-service": "^4.1.0",
     "pug": "^3.0.0",
-    "rxjs": "~6.5.5",
+    "rxjs": "~6.6.7",
     "sanitize-filename": "^1.6.3",
     "serve-static": "^1.13.2",
     "tslib": "^2.0.0",
